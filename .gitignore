@@ -1,0 +1,4 @@
+build/img/*.jpg
+node_modules
+vendor
+src/img/*
