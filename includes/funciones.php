@@ -3,7 +3,11 @@
 // DIR hace que php defina la ruta completa hacia un archivo.
 define('TEMPLATES_URL', __DIR__ . '/templates');
 define('FUNCIONES_URL', __DIR__ . 'funciones.php');
-define('CARPETAIMAGENES', __DIR__ . '/imagenes');
+define('CARPETAIMAGENES', $_SERVER['DOCUMENT_ROOT'] . '/imagenes');
+//$_SERVER['DOCUMENT_ROOT] El directorio raíz de documentos del
+ //servidor en el cual 
+// se está ejecutando el script actual, según 
+//está definida en el archivo de configuración del servidor.
 
 //cuando llamemos a esta funcion nos va a devolver la ruta a la carpeta de nuestros
 //templates, y concatenaremos el nombre del template que passaremos como parametro.
@@ -62,4 +66,17 @@ function mostrarNotificaiones(int $resultado) : string{
     }
 
     return $mensaje;
+}
+
+//funcion para validar o redireccionar a partir de si la url es valida
+
+function validarORedireccionar(string $url){
+    $id = $_GET['id'];
+    $id = filter_var($id, FILTER_VALIDATE_INT); //validar que el id sea un numero entero
+
+    if (!$id) {
+    header("Location:{$url}");
+    }
+
+    return $id;
 }
